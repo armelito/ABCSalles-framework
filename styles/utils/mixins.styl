@@ -1,0 +1,148 @@
+.cover
+  width 100%
+  height 100%
+  object-fit cover
+  position absolute
+  left 0
+  top 0
+
+flexbox()
+  display -webkit-box
+  display -moz-box
+  display -ms-flexbox
+  display -webkit-flex
+  display flex
+
+flex($values)
+  -webkit-box-flex $values
+  -moz-box-flex $values
+  -webkit-flex $values
+  -ms-flex $values
+  flex $values
+
+order($val)
+  -webkit-box-ordinal-group $val
+  -moz-box-ordinal-group $val
+  -ms-flex-order $val
+  -webkit-order $val
+  order $val
+
+.flex
+  &--sc
+    flexbox()
+    justify-content flex-start
+    align-items center
+
+  &--cc
+    flexbox()
+    justify-content center
+    align-items center
+
+  &--bc
+    flexbox()
+    justify-content space-between
+    align-items center
+
+  &--bs
+    flexbox()
+    justify-content space-between
+    align-items flex-start
+
+  &--ec
+    flexbox()
+    justify-content flex-end
+    align-items center
+
+  &--ss
+    flexbox()
+    justify-content flex-start
+    align-items flex-start
+
+  &--cs
+    flexbox()
+    justify-content center
+    align-items flex-start
+
+  &--es
+    flexbox()
+    justify-content flex-end
+    align-items flex-start
+
+  &--se
+    flexbox()
+    justify-content flex-start
+    align-items flex-end
+
+  &--ce
+    flexbox()
+    justify-content center
+    align-items flex-end
+
+  &--cb
+    flexbox()
+    justify-content center
+    align-items space-between
+
+  &--ee
+    flexbox()
+    justify-content flex-end
+    align-items flex-end
+
+absolute-lt(x, y)
+  position absolute
+  left x
+  top y
+
+absolute-lb(x, y)
+  position absolute
+  left x
+  bottom y
+
+absolute-rt(x, y)
+  position absolute
+  right x
+  top y
+
+absolute-rb(x, y)
+  position absolute
+  right x
+  bottom y
+
+center(x = -50%, y = -50%)
+  transform translateX(x) translateY(y)
+
+size($width, $height)
+  width $width
+  height $height
+
+ratio($width, $height)
+  font-size 0
+  overflow hidden
+  position relative
+
+  &:after
+    content ''
+    width 100%
+    display inline-block
+    padding-top $width / $height = 100%
+
+border-radius($n)
+  -webkit-border-radius $n
+  -moz-border-radius $n
+  border-radius $n
+
+will($type)
+  will-change $type
+
+smoothScrollInit()
+  width 100%
+  height 100%
+  top 0
+  left 0
+  position fixed
+
+support-for-ie ?= true
+    opacity(n)
+      opacity n
+      if support-for-ie
+        filter unquote('progid:DXImageTransform.Microsoft.Alpha(Opacity=' + round(n * 100) + ')')

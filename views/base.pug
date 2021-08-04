@@ -1,7 +1,7 @@
 block variables
 
 doctype html
-html(lang="en" class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "phone" : "")
+html(lang="en")
   head
     meta(charset="UTF-8")
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
@@ -24,13 +24,10 @@ html(lang="en" class=isDesktop ? "desktop" : isTablet ? "tablet" : isPhone ? "ph
     meta(name="twitter:description" content=meta.data.description)
     meta(name="twitter:image" content=meta.data.image ? meta.data.image.url : '')
 
-    link(rel="preload" href="/main.css" as="style" onload="this.onload = function () {}; this.rel = 'stylesheet';")
-
-    noscript
-      link(rel="stylesheet" href="/main.css")
+    link(rel="stylesheet" href="main.css")
 
   body
-    include ./partials/preloader
+    //include ./partials/preloader
     include ./partials/header
     include ./partials/navigation
 

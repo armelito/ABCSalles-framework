@@ -1,10 +1,24 @@
 extends ../base.pug
 
+include ../utils/mixins.pug
+
 block variables
   - var template = 'home'
+  - var number = '96'
 
 block content
   .home
     .home__wrapper
-      section.home__contact__wrapper
-        h1=Home
+      a.home__thumbnail(href=link(home.data.thumbnail_link))
+        include ../components/thumbnail
+
+      +article-wrapper('Actualités', '96', home.data.actu_link, home.data.actu_button)
+      +article-wrapper('Inspirations', '111', home.data.inspi_link, home.data.inspi_button)
+
+      section.home__guides
+        .home__guides__wrapper
+          each guide in home.data.guides
+            a.home__guides__guide(href=link(guide.guides_guide))
+              span=guide.guides_guide.data.title
+
+      +event-wrapper('Évènements', '13', home.data.events_link, home.data.events_button)

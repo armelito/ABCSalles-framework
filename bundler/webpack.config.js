@@ -37,6 +37,10 @@ module.exports =
       patterns:
       [
         {
+          from: path.join(dirApp, 'service-worker.js'),
+          to: ''
+        },
+        {
           from: path.resolve(__dirname, '../static'),
           to: ''
         }

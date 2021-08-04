@@ -1,20 +1,9 @@
 require('dotenv').config()
 
-const path = require('path')
-const logger = require('morgan')
-const express = require('express')
-const errorHandler = require('errorhandler')
-const bodyParser = require('body-parser')
-const methodOverride = require('method-override')
-
-const app = express()
-const port = 3000
-const UAParser = require('ua-parser-js')
-
+const app = require('./config')
 const Prismic = require('@prismicio/client')
 const PrismicDOM = require('prismic-dom')
-const { cpuUsage } = require('process')
-const { each } = require('lodash')
+const UAParser = require('ua-parser-js')
 
 const apiEndpoint = process.env.PRISMIC_ENDPOINT
 const accessToken = process.env.PRISMIC_ACCESS_TOKEN
@@ -31,29 +20,28 @@ const initApi = req =>
 const handleLinkResolver = doc =>
 {
   if(doc.type === 'article')
-    return `/article/${doc.slug}`
+    return `/article/${doc.uid}`
 
   if(doc.type === 'event')
-    return `/event/${doc.slug}`
+    return `/event/${doc.uid}`
 
   if(doc.type === 'guide')
-    return `/guide/${doc.slug}`
+    return `/guide/${doc.uid}`
 
   if(doc.type === 'category')
-    return `/category/${doc.slug}`
+    return `/c/${doc.uid}`
 
   if(doc.type === 'about')
     return `/about`
 
-  return '/'
-}
+  if(doc.type === 'home')
+    return '/'
 
-app.use(logger('dev'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(methodOverride())
-app.use(express.static(path.join(__dirname, 'public')))
-app.use(errorHandler())
+  if(doc.isBroken)
+    return '/not-found'
+
+  return '/not-found'
+}
 
 app.use((req, res, next) =>
 {
@@ -67,9 +55,6 @@ app.use((req, res, next) =>
 
   next()
 })
-
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'pug')
 
 const handleRequest = async api =>
 {
@@ -88,26 +73,33 @@ app.get('/', async (req, res) =>
 {
   const api =  await initApi(req)
   const defaults = await handleRequest(api)
-  const home = await api.getSingle('home')
-  const { results: categories } = await api.query(Prismic.Predicates.at( 'document.type', 'category' ),
+  const home = await api.getSingle
+  (
+    'home',
     {
       fetchLinks:
       [
+        'article.name',
         'article.image',
-        'article.title',
+        'article.date',
+        'event.name',
         'event.image',
-        'event.title',
+        'event.date',
+        'event.place',
+        'guide.title',
         'guide.image',
-        'guide.title'
       ]
     }
   )
+  const { results: thumbnail } = await api.query(Prismic.Predicates.at('document.id', home.data.thumbnail_link.id))
+  const { results: categories } = await api.query(Prismic.Predicates.at('document.type', 'category'))
 
   res.render('pages/home',
   {
     ...defaults,
     home,
     categories,
+    thumbnail
   })
 })
 
@@ -124,7 +116,7 @@ app.get('/about', async (req, res) =>
   })
 })
 
-app.get('/category/:uid', async (req, res) =>
+app.get('/c/:uid', async (req, res) =>
 {
   const api =  await initApi(req)
   const defaults = await handleRequest(api)
@@ -139,11 +131,20 @@ app.get('/category/:uid', async (req, res) =>
   //  { fetchLinks: ['project.image', 'project.title', 'project.description'] }
   //)
 
-  res.render('pages/category',
-  {
-    ...defaults,
-    category
-  })
+  console.log(category.data.contents)
+
+  if(category)
+    res.render('pages/category',
+    {
+      ...defaults,
+      category
+    })
+
+  else
+    res.render('pages/notFound',
+    {
+      ...defaults,
+    })
 })
 
 app.get('/article/:uid', async (req, res) =>
@@ -158,11 +159,18 @@ app.get('/article/:uid', async (req, res) =>
     { fetchLinks: 'article.title' }
   )
 
-  res.render('pages/article',
-  {
-    ...defaults,
-    article
-  })
+  if(article)
+    res.render('pages/article',
+    {
+      ...defaults,
+      article
+    })
+
+  else
+    res.render('pages/notFound',
+    {
+      ...defaults,
+    })
 })
 
 app.get('/event/:uid', async (req, res) =>
@@ -177,11 +185,18 @@ app.get('/event/:uid', async (req, res) =>
     { fetchLinks: 'event.title' }
   )
 
-  res.render('pages/event',
-  {
-    ...defaults,
-    event
-  })
+  if(event)
+    res.render('pages/event',
+    {
+      ...defaults,
+      event
+    })
+
+  else
+    res.render('pages/notFound',
+    {
+      ...defaults,
+    })
 })
 
 app.get('/guide/:uid', async (req, res) =>
@@ -196,14 +211,43 @@ app.get('/guide/:uid', async (req, res) =>
     { fetchLinks: 'guide.title' }
   )
 
-  res.render('pages/guide',
+  if(guide)
+    res.render('pages/guide',
+    {
+      ...defaults,
+      guide
+    })
+
+  else
+    res.render('pages/notFound',
+    {
+      ...defaults,
+    })
+})
+
+app.get('/not-found', async (req, res) =>
+{
+  const api =  await initApi(req)
+  const defaults = await handleRequest(api)
+
+  res.render('pages/notFound',
   {
-    ...defaults,
-    guide
+    ...defaults
   })
 })
 
-app.listen(port, () =>
+app.use(async (req, res) =>
 {
-  console.log(`App listening at http://localhost:${port}`)
+  const api =  await initApi(req)
+  const defaults = await handleRequest(api)
+
+  res.status(404).render('pages/notFound',
+  {
+    ...defaults
+  })
+})
+
+app.listen(app.get('port'), () =>
+{
+  console.log(`App listening at http://localhost:${app.get('port')}`)
 })

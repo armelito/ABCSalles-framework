@@ -27,6 +27,49 @@ mixin event-thumbnail(_url, _src, _alt, _title, _date, _place)
         span='Partager'
 
 
+mixin hero
+  section.layout__hero
+    h1.layout__hero__title=category.data.title
+    p.layout__hero__text=category.data.paragraph
+
+
+mixin slider(_title)
+  section.layout__slider
+    .layout__slider__header
+      h2.layout__slider__title=_title
+      .layout__slider__handlers
+        span.layout__selection__handler="previous"
+        span.layout__selection__handler="next"
+
+    .slider
+      .slider__wrapper
+        - let length = 0
+        each content in category.data.contents
+          - if(categoryTemplate === 'actualites' || categoryTemplate === 'inspirations')
+            include ../components/thumbnailArticle.pug
+          - else
+            include ../components/thumbnailEvent.pug
+
+          - length++
+          - if(length === 6)
+            - return
+
+
+mixin contents-row(_number, _limit)
+  .layout__contents__row
+    - if(_number < _limit)
+        each content in category.data.contents
+          - if(categoryTemplate === 'actualites' || categoryTemplate === 'inspirations')
+            include ../components/thumbnailArticle.pug
+          - else
+            include ../components/thumbnailEvent.pug
+
+          - _number++
+          - if(_number === _limit)
+            - _limit += 3
+            - return _number, _limit
+
+
 mixin article-wrapper(_headline, _number, _url, _button)
   - let limit = []
   section.category

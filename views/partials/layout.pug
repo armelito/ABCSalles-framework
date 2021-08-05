@@ -1,0 +1,23 @@
+extends ../base.pug
+include ../utils/mixins.pug
+
+block variables
+
+block content
+  .layout
+    .layout__wrapper
+      block hero
+      block thumbnail
+      block slider
+
+      section.layout__contents
+        h2.layout__contents__title=category.data.contents_title
+        - let limit = 3
+        - let number = 0
+        .layout__contents__wrapper
+          +contents-row(number, limit)
+          +contents-row(number, limit)
+          +contents-row(number, limit)
+
+        button.layout__button=category.data.more
+

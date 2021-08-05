@@ -1,10 +1,19 @@
-extends ../base.pug
+extends ../partials/layout.pug
+include ../utils/mixins.pug
 
 block variables
   - var template = 'category'
+  - var categoryTemplate = category.uid
 
-block content
-  .category
-    .category__wrapper
-      section.category__contact__wrapper
-        h1='Category'
+block hero
+  - if(categoryTemplate === 'actualites' || categoryTemplate === 'inspirations')
+    +hero
+
+block thumbnail
+  include ../components/thumbnailHero.pug
+
+block slider
+  +slider(category.data.selection_title)
+
+  - if(categoryTemplate === 'actualites' || categoryTemplate === 'inspirations')
+    +slider(category.data.favoris_title)

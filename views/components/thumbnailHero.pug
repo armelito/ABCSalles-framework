@@ -1,0 +1,22 @@
+a.thumbnail(href=link(thumbnail))
+  article.thumbnail__wrapper
+    .thumbnail__content
+      .thumbnail__info
+        .thumbnail__info__reading
+          .thumbnail__info__reading__views
+            span='0'
+          .thumbnail__info__reading__duration
+            span=thumbnail.data.duration
+
+        .thumbnail__info__titles
+          h1.thumbnail__info__titles__title=thumbnail.data.name
+          span.thumbnail__info__titles__paragraphe=thumbnail.data.chapeau
+
+        .thumbnail__info__others
+          span.thumbnail__info__others__date=thumbnail.data.date
+          span.thumbnail__info__others__tag=thumbnail.tags[0]
+
+      button.thumbnail__button='Découvrir'
+
+    figure.thumbnail__media
+      img.thumbnail__media__image(alt=thumbnail.data.image.alt src=thumbnail.data.image.url)

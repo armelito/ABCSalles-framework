@@ -1,0 +1,9 @@
+a.thumbnailArticle__link(href=link(content.contents_content))
+  figure.thumbnailArticle__media
+    img.thumbnailArticle__media__image(alt=content.contents_content.data.image.alt src=content.contents_content.data.image.url)
+
+  span.thumbnailArticle__title=content.contents_content.data.name
+
+  .thumbnailArticle__infos
+    span.thumbnailArticle__infos__date=content.contents_content.data.date
+    button.thumbnailArticle__infos__tag=content.contents_content.tags[0]

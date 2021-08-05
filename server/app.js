@@ -4,7 +4,7 @@ const app = require('./config')
 const Prismic = require('@prismicio/client')
 const PrismicDOM = require('prismic-dom')
 const UAParser = require('ua-parser-js')
-
+const each = require('lodash/each')
 const apiEndpoint = process.env.PRISMIC_ENDPOINT
 const accessToken = process.env.PRISMIC_ACCESS_TOKEN
 
@@ -85,20 +85,18 @@ app.get('/', async (req, res) =>
         'event.name',
         'event.image',
         'event.date',
-        'event.place',
-        'guide.title',
-        'guide.image',
+        'event.place'
       ]
     }
   )
-  const { results: thumbnail } = await api.query(Prismic.Predicates.at('document.id', home.data.thumbnail_link.id))
-  const { results: categories } = await api.query(Prismic.Predicates.at('document.type', 'category'))
+  const thumbnail = await api.getByID(home.data.thumbnail_link.id)
+  const guides = await api.getByID('YQk6hRAAACcAQQ77', { fetchLinks: 'guide.title' })
 
   res.render('pages/home',
   {
     ...defaults,
     home,
-    categories,
+    guides,
     thumbnail
   })
 })
@@ -124,20 +122,29 @@ app.get('/c/:uid', async (req, res) =>
   (
     'category',
     req.params.uid,
-    { fetchLinks: 'category.title' }
+    { fetchLinks:
+      [
+        'category.title',
+        'article.image',
+        'article.name',
+        'article.date',
+        'event.image',
+        'event.name',
+        'event.date',
+        'event.place',
+        'guide.image',
+        'guide.title'
+      ]
+    }
   )
-  //const home = await api.getSingle('home')
-  //const { results: s } = await api.query(Prismic.Predicates.at( 'document.type', 'collection' ),
-  //  { fetchLinks: ['project.image', 'project.title', 'project.description'] }
-  //)
-
-  console.log(category.data.contents)
+  const thumbnail = await api.getByID(category.data.thumbnail_link.id)
 
   if(category)
     res.render('pages/category',
     {
       ...defaults,
-      category
+      category,
+      thumbnail
     })
 
   else

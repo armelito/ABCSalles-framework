@@ -45,7 +45,7 @@ mixin slider(_title)
       .slider__wrapper
         - let length = 0
         each content in category.data.contents
-          - if(categoryTemplate === 'actualites' || categoryTemplate === 'inspirations')
+          - if(categoryTemplate === 'actualites' || categoryTemplate === 'inspirations' || categoryTemplate === 'guides')
             include ../components/thumbnailArticle.pug
           - else
             include ../components/thumbnailEvent.pug
@@ -59,7 +59,7 @@ mixin contents-row(_number, _limit)
   .layout__contents__row
     - if(_number < _limit)
         each content in category.data.contents
-          - if(categoryTemplate === 'actualites' || categoryTemplate === 'inspirations')
+          - if(categoryTemplate === 'actualites' || categoryTemplate === 'inspirations' || categoryTemplate === 'guides')
             include ../components/thumbnailArticle.pug
           - else
             include ../components/thumbnailEvent.pug

@@ -5,3 +5,26 @@
 
 body
   margin 0 auto
+  background-color $background
+
+section
+  padding pxToRem(80) pxToRem(108)
+span,
+p
+  font-family $font-body-2
+  font-size $bodyLarge
+  letter-spacing pxToRem(0.4)
+  line-height pxToRem(28)
+  color $paragraph
+
+img
+  width 100%
+  height 100%
+  object-fit cover
+  vertical-align middle
+  transition opacity 500ms $ease-in-1
+
+a
+  outline none
+  text-decoration none
+  color $white

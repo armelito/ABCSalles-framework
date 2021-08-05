@@ -6,5 +6,157 @@ block variables
 block content
   .event
     .event__wrapper
-      section.event__contact__wrapper
-        h1='Event'
+      section.event__hero
+        figure.event__hero__media
+          img.event__hero__media__image(alt=event.data.image.alt src=event.data.image.url)
+
+        .event__hero__header
+          .event__hero__date
+            span.event__hero__date__icon='calendar'
+            span.event__hero__date__text=event.data.date
+
+          .event__hero__infos
+            .event__hero__titles
+              h1.event__hero__title=event.data.name
+              h1.event__hero__year=event.data.year
+              //span.event__hero__edition="2e édition"
+            .event__hero__subtitles
+              .event__hero__place
+                span.event__hero__place__icon="icon"
+                span.event__hero__place__text=event.data.place
+
+              .event__hero__status
+                span.event__hero__status__icon="icon"
+                span.event__hero__status__text=event.data.status
+
+          .event__hero__buttons
+            button.event__hero__button
+              span.event__hero__button__icon="icon"
+              span.event__hero__button__text="M'inscrire"
+
+            button.event__hero__button
+              span.event__hero__button__icon="icon"
+              span.event__hero__button__text="Ajouter à mon calendrier"
+
+            button.event__hero__button
+              span.event__hero__button__icon="icon"
+              span.event__hero__button__text="Partager"
+
+      section.event__intro
+        p.event__intro__text=event.data.paragraphe
+        button.event__intro__button
+          span.event__intro__button__text="Voir le programme"
+          span.event__intro__button__icon="icon"
+
+      section.event__informations
+        .event__informations__wrapper
+          .event__informations__card
+            h2.event__informations__title=event.data.info[0].info_title
+            .event__informations__infos
+              .event__informations__info
+                span.event__informations__info__icon="icon"
+                span.event__informations__info__text=event.data.info[0].info_visitors
+
+              .event__informations__info
+                span.event__informations__info__icon="icon"
+                span.event__informations__info__text=event.data.info[0].info_exposants
+
+              .event__informations__info
+                span.event__informations__info__icon="icon"
+                span.event__informations__info__text=event.data.info[0].info_creation
+
+              .event__informations__info
+                span.event__informations__info__icon="icon"
+                span.event__informations__info__text=event.data.info[0].info_place
+
+              .event__informations__info
+                span.event__informations__info__icon="icon"
+                span.event__informations__info__text=event.data.info[0].info_adress
+
+              .event__informations__info
+                span.event__informations__info__icon="icon"
+                span.event__informations__info__text=event.data.info[0].info_country
+
+              .event__informations__info
+                span.event__informations__info__icon="icon"
+                span.event__informations__info__text=event.data.info[0].info_type
+
+              .event__informations__info
+                span.event__informations__info__icon="icon"
+                a.event__informations__info__text(href=link(event.data.info[0].info_link.url))=event.data.info[0].info_link.url
+
+          .event__informations__geo
+            .event__informations__geo__map
+            button.event__informations__geo__button
+              span.event__informations__geo__button__text="Ouvrir dans maps"
+
+      section.event__gallery
+        h2.event__gallery__title=event.data.gallery_title
+        .gallery__wrapper
+          each photo in event.data.gallery
+            figure.gallery__media
+              img.gallery__media__image(alt=photo.gallery_image.alt src=photo.gallery_image.url)
+
+      section.event__cards
+        .event__cards__left
+          .event__card
+            h2.event__card__title=event.data.programme[0].programme_title
+            p.event__card__text=event.data.programme[0].programme_paragraphe
+            .event__card__labels
+              span.event__card__labels__label="10h00"
+              span.event__card__labels__result=event.data.programme[0].programme_info
+
+            .event__card__labels
+              span.event__card__labels__label="12h00"
+              span.event__card__labels__result=event.data.programme[0].programme_info2
+
+            .event__card__labels
+              span.event__card__labels__label="15h00"
+              span.event__card__labels__result=event.data.programme[0].programme_info3
+
+          .event__card
+            h2.event__card__title=event.data.tarifs[0].tarifs_title
+            p.event__card__text=event.data.tarifs[0].tarifs_paragraphe
+            .event__card__labels
+              span.event__card__labels__label="Enfants :"
+              span.event__card__labels__result=event.data.tarifs[0].tarifs_children
+
+            .event__card__labels
+              span.event__card__labels__label="Adultes :"
+              span.event__card__labels__result=event.data.tarifs[0].tarifs_adults
+
+            .event__card__labels
+              span.event__card__labels__label="Séniors :"
+              span.event__card__labels__result=event.data.tarifs[0].tarifs_senior
+
+        .events__cards__right
+          .event__card
+            h2.event__card__title=event.data.organizator[0].organizator_title
+            .event__card__contact
+              p.event__card__organizator=event.data.organizator[0].organizator_name
+              p.event__card__mail=event.data.organizator[0].organizator_email
+
+            p.event__card__text=event.data.organizator[0].organizator_paragraphe
+
+            .event__card__labels
+              span.event__card__labels__label="icon"
+              span.event__card__labels__result=event.data.organizator[0].organizator_number
+
+            .event__card__labels
+              span.event__card__labels__label="icon"
+              a.event__card__labels__result(href=link(event.data.organizator[0].organizator_link.url))=event.data.organizator[0].organizator_link.url
+
+            .event__card__labels
+              span.event__card__labels__label="icon"
+              a.event__card__labels__result(href=link(event.data.organizator[0].organizator_network.url))=event.data.organizator[0].organizator_network.url
+
+          .event__card
+            h2.event__card__title="Partenaires"
+
+          .event__card
+            h2.event__card__title="Exposants"
+
+      section.event__tags
+        each tag in event.tags
+          button.event__tag
+            span.event__tag__tex=tag

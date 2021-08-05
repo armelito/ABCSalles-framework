@@ -166,6 +166,8 @@ app.get('/article/:uid', async (req, res) =>
     { fetchLinks: 'article.title' }
   )
 
+  console.log(article, article.data.body)
+
   if(article)
     res.render('pages/article',
     {
@@ -192,6 +194,8 @@ app.get('/event/:uid', async (req, res) =>
     { fetchLinks: 'event.title' }
   )
 
+  console.log(event, event.data.body)
+
   if(event)
     res.render('pages/event',
     {
@@ -217,6 +221,8 @@ app.get('/guide/:uid', async (req, res) =>
     req.params.uid,
     { fetchLinks: 'guide.title' }
   )
+
+  console.log(guide, guide.data.body)
 
   if(guide)
     res.render('pages/guide',

@@ -1,4 +1,5 @@
 extends ../base.pug
+include ../utils/mixins.pug
 
 block variables
   - var template = 'article'
@@ -6,5 +7,31 @@ block variables
 block content
   .article
     .article__wrapper
-      section.article__contact__wrapper
-        h1='Article'
+      section.article__hero
+        figure.article__hero__media
+          img.article__hero__media__image(alt=article.data.image.alt src=article.data.image.url)
+
+        .article__hero__header
+          .article__hero__numbers
+            .article__hero__numbers__views='0'
+            .article__hero__numbers__duration=article.data.duration
+
+          .article__hero__titles
+            h1.article__hero__title=article.data.name
+            .article__heros__author
+              figure.article__hero__author__media
+                img.article__hero__author__media__image
+
+              span.article__hero__author__name=article.data.author
+
+          .article__hero__infos
+            span.article__hero__infos__date=article.data.date
+            button.article__hero__infos__tag=article.tags[0]
+
+      section.article__intro
+        p.article__intro__chapeau=article.data.chapeau
+        p.article__intro__text=article.data.intro
+
+      each slice, index in article.data.body
+        +article-slice(index)
+

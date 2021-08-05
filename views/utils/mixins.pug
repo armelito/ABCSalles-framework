@@ -117,3 +117,29 @@ mixin event-wrapper(_headline, _number, _url, _button)
       a.category__link(href=link(_url))=_button
 
 
+mixin article-slice(_index)
+  - let isBottom = false, isRight = false, isLeft = false, isVignettes = false, isQuote = false
+
+  - if(article.data.body[_index].primary.type === 'Bottom') isBottom = true
+  - else if(article.data.body[_index].primary.type === 'Left') isLeft = true
+  - else if(article.data.body[_index].primary.type === 'Right') isRight = true
+  - else if(article.data.body[_index].primary.type === 'Vignettes') isVignettes = true
+  - else isQuote = true
+
+  section.article__slice
+    .article__slice__wrapper(class=isBottom ? '--slice-bottom' : isLeft ? '--slice-left' : isRight ? '--slice-right' : isVignettes ? '--slice-vignettes' : '--slice-quote')
+    - if(!isQuote)
+      .article__slice__contents
+        .article__slice__texts
+          h1.article__slice__title=article.data.body[_index].primary.title
+          p.article__slice__text=article.data.body[_index].primary.paragraphe
+
+        a.article__link(href=link(article.data.body[_index].primary.link.url))
+          span.article__link__text=article.data.body[_index].primary.button
+
+      figure.article__slice__media
+        img.article__slice__media__image(alt=article.data.body[_index].primary.capture.alt src=article.data.body[_index].primary.capture.url)
+
+    - if(isQuote)
+      p.article__slice__quote=article.data.body[_index].primary.quote
+      p.article__slice__writer=article.data.body[_index].primary.writer

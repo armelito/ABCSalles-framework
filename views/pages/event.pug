@@ -8,7 +8,7 @@ block content
     .event__wrapper
       section.event__hero
         figure.event__hero__media
-          img.event__hero__media__image(alt=event.data.image.alt src=event.data.image.url)
+          img.event__hero__media__image(alt=event.data.image.alt data-src=event.data.image.url)
 
         .event__hero__header
           .event__hero__date
@@ -95,7 +95,7 @@ block content
         .gallery__wrapper
           each photo in event.data.gallery
             figure.gallery__media
-              img.gallery__media__image(alt=photo.gallery_image.alt src=photo.gallery_image.url)
+              img.gallery__media__image(alt=photo.gallery_image.alt data-src=photo.gallery_image.url)
 
       section.event__cards
         .event__cards__left

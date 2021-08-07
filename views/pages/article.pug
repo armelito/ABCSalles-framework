@@ -9,7 +9,7 @@ block content
     .article__wrapper
       section.article__hero
         figure.article__hero__media
-          img.article__hero__media__image(alt=article.data.image.alt src=article.data.image.url)
+          img.article__hero__media__image(alt=article.data.image.alt data-src=article.data.image.url)
 
         .article__hero__header
           .article__hero__numbers
@@ -19,8 +19,8 @@ block content
           .article__hero__titles
             h1.article__hero__title=article.data.name
             .article__heros__author
-              figure.article__hero__author__media
-                img.article__hero__author__media__image
+              //figure.article__hero__author__media
+              //  img.article__hero__author__media__image
 
               span.article__hero__author__name=article.data.author
 

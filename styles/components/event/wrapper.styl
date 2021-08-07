@@ -1,0 +1,29 @@
+
+.category
+  &__row
+    display flex
+    justify-content space-between
+    align-items center
+
+    margin-bottom pxToRem(32)
+
+  &__row:last-child
+    align-items flex-start
+
+    margin-bottom 0
+
+  &__link
+    display flex
+    justify-content center
+    align-items center
+
+    width ratio(392)
+    height ratio(255)
+
+    background-color $primary-default
+    border-radius pxToRem(8)
+
+    & > span
+      width ratio(204)
+      color $white
+      font-weight 800

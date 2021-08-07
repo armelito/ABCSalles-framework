@@ -1,0 +1,40 @@
+.thumbnail__event
+  &__media
+    width ratio(392)
+    height ratio(255)
+    margin-bottom pxToRem(4)
+
+  &__date
+    color $primary-complementary
+    font-family $font-subtitle
+    font-weight 700
+    font-size pxToRem(14)
+
+  &__title
+    margin-bottom pxToRem(3)
+    color $subtitle
+    font-weight 600
+
+    display -webkit-box
+    -webkit-line-clamp 1
+    -webkit-box-orient vertical
+
+    overflow hidden
+    text-overflow ellipsis
+
+  &__place
+    max-width 100%
+    font-size pxToRem(16)
+
+  &__buttons
+    margin-top pxToRem(12)
+
+  &__button:first-child
+    margin-right pxToRem(16)
+
+  &__button
+    padding pxToRem(12) pxToRem(16)
+
+    & > span
+      font-size pxToRem(16)
+      color $subtitle

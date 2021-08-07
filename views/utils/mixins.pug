@@ -1,7 +1,7 @@
 mixin article-thumbnail(_url, _src, _alt, _title, _date, _tag)
   a.thumbnail__article(href=link(_url))
     figure.thumbnail__article__media
-      img.thumbnail__article__media__image(alt=_alt src=_src)
+      img.thumbnail__article__media__image(alt=_alt data-src=_src)
 
     p.thumbnail__article__title=_title
 
@@ -10,10 +10,11 @@ mixin article-thumbnail(_url, _src, _alt, _title, _date, _tag)
       button.thumbnail__article__info__tag=_tag
 
 
+
 mixin event-thumbnail(_url, _src, _alt, _title, _date, _place)
   a.thumbnail__event(href=link(_url))
     figure.thumbnail__event__media
-      img.thumbnail__event__media__image(alt=_alt src=_src)
+      img.thumbnail__event__media__image(alt=_alt data-src=_src)
 
     span.thumbnail__event__date=_date
     span.thumbnail__event__title=_title
@@ -27,10 +28,12 @@ mixin event-thumbnail(_url, _src, _alt, _title, _date, _place)
         span='Partager'
 
 
+
 mixin hero
   section.layout__hero
     h1.layout__hero__title=category.data.title
     p.layout__hero__text=category.data.paragraph
+
 
 
 mixin slider(_title)
@@ -55,6 +58,7 @@ mixin slider(_title)
             - return
 
 
+
 mixin contents-row(_number, _limit)
   .layout__contents__row
     - if(_number < _limit)
@@ -68,6 +72,7 @@ mixin contents-row(_number, _limit)
           - if(_number === _limit)
             - _limit += 3
             - return _number, _limit
+
 
 
 mixin article-wrapper(_headline, _number, _url, _button)
@@ -107,16 +112,29 @@ mixin article-wrapper(_headline, _number, _url, _button)
           span=_button
 
 
+
 mixin event-wrapper(_headline, _number, _url, _button)
   - let limit = []
   section.category
     h2.category__title=_headline + ' (' + _number + ')'
     .category__row
-    - limit = [1, 2, 3]
+      - limit = [0, 1, 2]
       each entry in limit
         +event-thumbnail(home.data.events[entry].events_event, home.data.events[entry].events_event.data.image.url, home.data.events[entry].events_event.data.image.alt, home.data.events[entry].events_event.data.name, home.data.events[entry].events_event.data.date, home.data.events[entry].events_event.data.place)
 
-      a.category__link(href=link(_url))=_button
+    .category__row
+      - limit = [3, 4, 5]
+      each entry in limit
+        +event-thumbnail(home.data.events[entry].events_event, home.data.events[entry].events_event.data.image.url, home.data.events[entry].events_event.data.image.alt, home.data.events[entry].events_event.data.name, home.data.events[entry].events_event.data.date, home.data.events[entry].events_event.data.place)
+
+    .category__row
+      - limit = [6, 7]
+      each entry in limit
+        +event-thumbnail(home.data.events[entry].events_event, home.data.events[entry].events_event.data.image.url, home.data.events[entry].events_event.data.image.alt, home.data.events[entry].events_event.data.name, home.data.events[entry].events_event.data.date, home.data.events[entry].events_event.data.place)
+
+      a.category__link(href=link(_url))
+        span=_button
+
 
 
 mixin article-slice(_index)
@@ -140,7 +158,7 @@ mixin article-slice(_index)
           span.article__link__text=article.data.body[_index].primary.button
 
       figure.article__slice__media
-        img.article__slice__media__image(alt=article.data.body[_index].primary.capture.alt src=article.data.body[_index].primary.capture.url)
+        img.article__slice__media__image(alt=article.data.body[_index].primary.capture.alt data-src=article.data.body[_index].primary.capture.url)
 
     - if(isQuote)
       p.article__slice__quote=article.data.body[_index].primary.quote

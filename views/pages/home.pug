@@ -1,5 +1,4 @@
 extends ../base.pug
-
 include ../utils/mixins.pug
 
 block variables
@@ -15,9 +14,10 @@ block content
       +article-wrapper('Inspirations', '111', home.data.inspi_link, home.data.inspi_button)
 
       section.home__guides
+        h2.home__guides__title="Nos guides"
         .home__guides__wrapper
           each guide in guides.data.contents
             a.home__guide(href=link(guide.contents_content))
-              span.home__guide__text=guide.contents_content.data.title
+              span.home__guide__text.subtitle--large=guide.contents_content.data.title
 
       +event-wrapper('Évènements', '13', home.data.events_link, home.data.events_button)

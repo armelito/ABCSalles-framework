@@ -1,0 +1,21 @@
+.home
+  @extend .page
+
+  &__guides
+    &__title
+      margin-bottom pxToRem(24)
+
+    &__wrapper
+      display flex
+      justify-content space-between
+      align-items center
+
+  &__guide
+    padding pxToRem(70) pxToRem(58)
+    background-color $primary-complementary
+
+    height ratio(180)
+    border-radius pxToRem(10)
+
+    &__text
+      color $white

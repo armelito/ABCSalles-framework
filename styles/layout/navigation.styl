@@ -1,0 +1,25 @@
+.navigation
+  padding pxToRem(19) pxToRem(108)
+  height pxToRem(82)
+
+  &__wrapper
+    display flex
+    justify-content flex-start
+    align-items center
+
+  &__list
+    display flex
+    justify-content space-between
+    align-items center
+
+    width ratio(686)
+    margin-left pxToRem(72)
+
+    &__item
+      padding pxToRem(8) pxToRem(8)
+      cursor pointer
+
+    &__link
+      font-size $bodyMedium
+      font-family $font-body-2
+      color $paragraph-4 !important

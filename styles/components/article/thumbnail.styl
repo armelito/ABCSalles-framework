@@ -1,0 +1,33 @@
+.thumbnail__article
+  &__media
+    margin-bottom pxToRem(16)
+
+  &__title
+    margin-bottom pxToRem(3)
+    color $subtitle
+    font-weight 600
+
+    display -webkit-box
+    -webkit-line-clamp 1
+    -webkit-box-orient vertical
+
+    overflow hidden
+    text-overflow ellipsis
+
+  &__info
+    display flex
+    justify-content space-between
+    align-items center
+
+    &__date
+      max-width 100%
+
+    &__tag
+      padding pxToRem(6) pxToRem(8)
+
+      border 1px solid $subtitle
+      border-radius 6px
+      background-color $grey-6
+
+      color $subtitle
+      font-weight 400

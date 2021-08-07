@@ -1,5 +1,5 @@
-a.thumbnail(href=link(thumbnail))
-  article.thumbnail__wrapper
+section.thumbnail
+  a.thumbnail__wrapper(href=link(thumbnail))
     .thumbnail__content
       .thumbnail__info
         .thumbnail__info__reading
@@ -10,11 +10,12 @@ a.thumbnail(href=link(thumbnail))
 
         .thumbnail__info__titles
           h1.thumbnail__info__titles__title=thumbnail.data.name
-          span.thumbnail__info__titles__paragraphe=thumbnail.data.chapeau
+          span.thumbnail__info__titles__paragraph.text--large=thumbnail.data.chapeau
 
         .thumbnail__info__others
-          span.thumbnail__info__others__date=thumbnail.data.date
-          span.thumbnail__info__others__tag=thumbnail.tags[0]
+          span.thumbnail__info__others__date.text--medium=thumbnail.data.date
+          div.thumbnail__info__others__dot
+          span.thumbnail__info__others__tag.text--medium=thumbnail.tags[0]
 
       button.thumbnail__button='Découvrir'
 

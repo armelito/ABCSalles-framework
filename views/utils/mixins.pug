@@ -3,11 +3,11 @@ mixin article-thumbnail(_url, _src, _alt, _title, _date, _tag)
     figure.thumbnail__article__media
       img.thumbnail__article__media__image(alt=_alt src=_src)
 
-    span.thumbnail__article__title=_title
+    p.thumbnail__article__title=_title
 
     .thumbnail__article__info
       span.thumbnail__article__info__date=_date
-      span.thumbnail__article__info__tag=_tag
+      button.thumbnail__article__info__tag=_tag
 
 
 mixin event-thumbnail(_url, _src, _alt, _title, _date, _place)
@@ -74,35 +74,37 @@ mixin article-wrapper(_headline, _number, _url, _button)
   - let limit = []
   section.category
     h2.category__title=_headline + ' (' + _number + ')'
-    .category__top__wrapper
-      .category__top__left__wrapper
-      - limit = [0, 1]
+    .category__wrapper
+      .category__wrapper__top
+        .category__wrapper__top__left
+          - limit = [0, 1]
+          each entry in limit
+            - if(_headline === 'Actualités')
+              +article-thumbnail(home.data.actus[entry].actus_actu, home.data.actus[entry].actus_actu.data.image.url, home.data.actus[entry].actus_actu.data.image.alt, home.data.actus[entry].actus_actu.data.name, home.data.actus[entry].actus_actu.data.date, home.data.actus[entry].actus_actu.tags[0])
+
+            - if(_headline === 'Inspirations')
+              +article-thumbnail(home.data.inspis[entry].inspis_inspi, home.data.inspis[entry].inspis_inspi.data.image.url, home.data.inspis[entry].inspis_inspi.data.image.alt, home.data.inspis[entry].inspis_inspi.data.name, home.data.inspis[entry].inspis_inspi.data.date, home.data.inspis[entry].inspis_inspi.tags[0])
+
+        .category__wrapper__top__right
+          - limit = [2, 3]
+          each entry in limit
+            - if(_headline === 'Actualités')
+              +article-thumbnail(home.data.actus[entry].actus_actu, home.data.actus[entry].actus_actu.data.image.url, home.data.actus[entry].actus_actu.data.image.alt, home.data.actus[entry].actus_actu.data.name, home.data.actus[entry].actus_actu.data.date, home.data.actus[entry].actus_actu.tags[0])
+
+            - if(_headline === 'Inspirations')
+              +article-thumbnail(home.data.inspis[entry].inspis_inspi, home.data.inspis[entry].inspis_inspi.data.image.url, home.data.inspis[entry].inspis_inspi.data.image.alt, home.data.inspis[entry].inspis_inspi.data.name, home.data.inspis[entry].inspis_inspi.data.date, home.data.inspis[entry].inspis_inspi.tags[0])
+
+      .category__wrapper__bottom
+        - limit = [4, 5]
         each entry in limit
-          - if(_headline === 'Actualités')
-            +article-thumbnail(home.data.actus[entry].actus_actu, home.data.actus[entry].actus_actu.data.image.url, home.data.actus[entry].actus_actu.data.image.alt, home.data.actus[entry].actus_actu.data.name, home.data.actus[entry].actus_actu.data.date, home.data.actus[entry].actus_actu.tags[0])
+            - if(_headline === 'Actualités')
+              +article-thumbnail(home.data.actus[entry].actus_actu, home.data.actus[entry].actus_actu.data.image.url, home.data.actus[entry].actus_actu.data.image.alt, home.data.actus[entry].actus_actu.data.name, home.data.actus[entry].actus_actu.data.date, home.data.actus[entry].actus_actu.tags[0])
 
-          - if(_headline === 'Inspirations')
-            +article-thumbnail(home.data.inspis[entry].inspis_inspi, home.data.inspis[entry].inspis_inspi.data.image.url, home.data.inspis[entry].inspis_inspi.data.image.alt, home.data.inspis[entry].inspis_inspi.data.name, home.data.inspis[entry].inspis_inspi.data.date, home.data.inspis[entry].inspis_inspi.tags[0])
+            - if(_headline === 'Inspirations')
+              +article-thumbnail(home.data.inspis[entry].inspis_inspi, home.data.inspis[entry].inspis_inspi.data.image.url, home.data.inspis[entry].inspis_inspi.data.image.alt, home.data.inspis[entry].inspis_inspi.data.name, home.data.inspis[entry].inspis_inspi.data.date, home.data.inspis[entry].inspis_inspi.tags[0])
 
-      .category__top__right__wrapper
-        - limit = [2, 3]
-        each entry in limit
-          - if(_headline === 'Actualités')
-            +article-thumbnail(home.data.actus[entry].actus_actu, home.data.actus[entry].actus_actu.data.image.url, home.data.actus[entry].actus_actu.data.image.alt, home.data.actus[entry].actus_actu.data.name, home.data.actus[entry].actus_actu.data.date, home.data.actus[entry].actus_actu.tags[0])
-
-          - if(_headline === 'Inspirations')
-            +article-thumbnail(home.data.inspis[entry].inspis_inspi, home.data.inspis[entry].inspis_inspi.data.image.url, home.data.inspis[entry].inspis_inspi.data.image.alt, home.data.inspis[entry].inspis_inspi.data.name, home.data.inspis[entry].inspis_inspi.data.date, home.data.inspis[entry].inspis_inspi.tags[0])
-
-    .category__bottom__wrapper
-      - limit = [4, 5]
-      each entry in limit
-          - if(_headline === 'Actualités')
-            +article-thumbnail(home.data.actus[entry].actus_actu, home.data.actus[entry].actus_actu.data.image.url, home.data.actus[entry].actus_actu.data.image.alt, home.data.actus[entry].actus_actu.data.name, home.data.actus[entry].actus_actu.data.date, home.data.actus[entry].actus_actu.tags[0])
-
-          - if(_headline === 'Inspirations')
-            +article-thumbnail(home.data.inspis[entry].inspis_inspi, home.data.inspis[entry].inspis_inspi.data.image.url, home.data.inspis[entry].inspis_inspi.data.image.alt, home.data.inspis[entry].inspis_inspi.data.name, home.data.inspis[entry].inspis_inspi.data.date, home.data.inspis[entry].inspis_inspi.tags[0])
-
-      a.category__link(href=link(_url))=_button
+        a.category__link(href=link(_url))
+          span=_button
 
 
 mixin event-wrapper(_headline, _number, _url, _button)

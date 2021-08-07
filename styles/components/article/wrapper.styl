@@ -1,0 +1,84 @@
+.category
+  min-height ratio(1605)
+
+  &__title
+    margin-bottom pxToRem(24)
+
+  &__wrapper
+    display flex
+    flex-direction column
+    justify-content space-between
+    align-items space-between
+
+    min-height ratio(654)
+
+    &__top
+      display flex
+      justify-content space-between
+
+      height 100%
+
+      & > div
+        display flex
+        flex-direction column
+        justify-content space-between
+        align-items flex-start
+
+        & > a:first-child
+          margin-bottom pxToRem(32)
+
+      &__left
+        width ratio(704)
+
+        & > a:first-child
+          & > figure
+            height ratio(653)
+
+        & > a:last-child
+          & > figure
+            height ratio(431)
+
+      &__right
+        width ratio(496)
+
+        & > a:first-child
+          & > figure
+            height ratio(400)
+
+        & > a:last-child
+          & > figure
+            height ratio(684)
+
+    &__bottom
+      display flex
+      justify-content space-between
+      align-items flex-start
+
+      width 100%
+      margin-top pxToRem(32)
+
+      & > a:first-child
+        width ratio(392)
+
+      & > a:nth-child(2)
+        width ratio(496)
+
+      & > a:last-child
+        display flex
+        justify-content center
+        align-items center
+
+        width ratio(288)
+        height ratio(318)
+
+        background-color $primary-default
+        border-radius pxToRem(8)
+
+        & > span
+          width ratio(204)
+          color $white
+          font-weight 800
+
+      & > a
+        & > figure
+          height ratio(318)

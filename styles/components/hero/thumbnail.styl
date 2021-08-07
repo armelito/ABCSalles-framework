@@ -1,0 +1,105 @@
+.thumbnail
+  width 100%
+  margin-top pxToRem(122)
+
+  &__wrapper
+    display flex
+    justify-content space-between
+    align-items center
+
+  &__content
+    display flex
+    flex-direction column
+    justify-content space-between
+    align-items flex-start
+
+    width ratio(528)
+    height ratio(420)
+
+  &__info
+    display flex
+    flex-direction column
+    justify-content space-between
+    align-items flex-start
+
+    height ratio(332)
+
+    &__reading
+      display flex
+      justify-content space-between
+      align-items center
+
+      & > div
+        display flew
+        align-items center
+
+        padding pxToRem(12) pxToRem(8)
+
+        border 1px solid $primary-complementary
+        border-radius 10px
+
+        span
+          color $primary-complementary
+          line-height 0
+
+      &__views
+        margin-right pxToRem(16)
+
+
+    &__titles
+      display flex
+      flex-direction column
+      align-items flex-start
+      justify-content space-between
+
+      height pxToRem(228)
+
+      &__paragraph
+        width ratio(528)
+        max-height 92px
+
+        display -webkit-box
+        -webkit-line-clamp 3
+        -webkit-box-orient vertical
+
+        overflow hidden
+        text-overflow ellipsis
+
+
+    &__others
+      display flex
+      justify-content space-between
+      align-items center
+
+      margin-top pxToRem(24)
+
+      &__date
+        color $subtitle
+
+      &__dot
+        width pxToRem(2)
+        height pxToRem(2)
+        border-radius 100px
+        background-color $subtitle
+
+        margin 0 pxToRem(8)
+
+      &__tag
+        padding pxToRem(16) pxToRem(12)
+
+        border 1px solid $subtitle
+        border-radius 8px
+        background-color $grey-6
+
+        color $subtitle
+        line-height 0
+
+  &__button
+    border-radius 10px
+    background-color $primary-default
+    color $white
+
+  &__media
+    width ratio(624)
+    height ratio(512)
+

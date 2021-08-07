@@ -11,19 +11,19 @@ import AsyncLoad from './AsyncLoad'
 export default class Page
 {
   constructor ({
-    _element,
-    _elements,
-    _id
+    element,
+    elements,
+    id
   })
   {
-    this.selector = _element
+    this.selector = element
     this.selectorChildren =
     {
-      ..._elements,
+      ...elements,
       preloaders: '[data-src]',
     }
 
-    this.id = _id
+    this.id = id
     this.transformPrefix = Prefix('transform')
 
     this.params =
@@ -76,9 +76,9 @@ export default class Page
 
   createPreloader()
   {
-    this.preloaders = map(this.elements.preloaders, _element =>
+    this.preloaders = map(this.elements.preloaders, element =>
     {
-      return new AsyncLoad({ _element })
+      return new AsyncLoad({ element })
     })
   }
 
@@ -131,6 +131,7 @@ export default class Page
 
   onResize ()
   {
+    console.log(this.elements)
     if(this.elements.wrapper)
       this.scroll.limit = this.elements.wrapper.clientHeight - window.innerHeight
 

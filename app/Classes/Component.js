@@ -3,12 +3,12 @@ import each from 'lodash/each'
 
 export default class Component extends EventEmitter
 {
-  constructor({ _element, _elements })
+  constructor({ element, elements })
   {
     super()
 
-    this.selector = _element
-    this.selectorChildren = { ..._elements }
+    this.selector = element
+    this.selectorChildren = { ...elements }
 
     this.create()
     this.addEventListeners()

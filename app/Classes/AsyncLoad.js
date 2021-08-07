@@ -2,9 +2,9 @@ import Component from 'Classes/Component'
 
 export default class AsyncLoad extends Component
 {
-  constructor({ _element })
+  constructor({ element })
   {
-    super({ _element })
+    super({ element })
 
     this.createObserver()
   }

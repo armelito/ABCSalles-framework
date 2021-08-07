@@ -8,8 +8,9 @@ import { split } from 'utils/text'
 export default class Preloader extends Component {
   constructor () {
     super({
-      _element: '.preloader',
-      _elements: {
+      element: '.preloader',
+      elements:
+      {
         title: '.preloader__text',
         number: '.preloader__number',
         numberText: '.preloader__number__text',

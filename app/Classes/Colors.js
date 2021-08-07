@@ -3,14 +3,14 @@ import GSAP from 'gsap'
 class Colors
 {
   change ({
-    _backgroundColor,
-    _color,
+    backgroundColor,
+    color,
   })
   {
     GSAP.to(document.documentElement,
     {
-      _backgroundColor,
-      _color,
+      backgroundColor,
+      color,
       duration: 1.5
     })
   }
